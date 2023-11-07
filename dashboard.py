@@ -286,6 +286,7 @@ elif selected=='Contact':
         if button:
             st.success("Thank you for Reaching out!")
             with open("assets/comments.txt", 'a') as file:
+                print(file.read())
                 file.write(f"{comment}\n____________________________________________\n")
 
     
