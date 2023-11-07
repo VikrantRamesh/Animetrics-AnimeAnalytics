@@ -284,10 +284,10 @@ elif selected=='Contact':
             button = st.form_submit_button("Send")
 
         if button:
-            st.success("Thank you for Reaching out!")
+            #st.success("Thank you for Reaching out!")
             with open("assets/comments.txt", 'a') as file:
                 fil = open("assets/comments.txt", 'r')
-                print(fil.read())
+                st.success(f"Thank you for Reaching out! {fil.read()}")
                 file.write(f"{comment}\n____________________________________________\n")
 
     
