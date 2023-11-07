@@ -268,7 +268,7 @@ elif selected=='Contact':
         )   
         # Image display in circular boundary
         col_left, cent, col_right = st.columns(3)
-        cent.image("assets\images\Vikrant.jpg",  use_column_width=True)
+        cent.image("assets/images/Vikrant.jpg",  use_column_width=True)
 
 
 
@@ -285,7 +285,7 @@ elif selected=='Contact':
 
         if button:
             st.success("Thank you for Reaching out!")
-            with open("assets\comments.txt", 'a') as file:
+            with open("assets/comments.txt", 'a') as file:
                 file.write(f"{comment}\n____________________________________________\n")
 
     
