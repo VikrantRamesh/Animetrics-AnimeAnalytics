@@ -361,8 +361,8 @@ elif selected=='Contact':
             </form>
         ''', unsafe_allow_html=True)
 
-        if button:
+        #if button:
             #send_req(comment)
-            st.success("Redirecting to Captcha...")
+            #st.success("Redirecting to Captcha...")
             # with open("assets\comments.txt", 'a') as file:
             #     file.write(f"{comment}\n____________________________________________\n")
