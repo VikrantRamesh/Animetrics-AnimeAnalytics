@@ -31,7 +31,7 @@ selected = option_menu(
         )
 
 if selected == 'Home':
-    st.title("Anime Analytics")
+    st.title("ANIMETRICS")
     st.markdown("###### Find Your Next Anime Recommendation!")
 st.markdown('<style>div.block-container{padding-top:3rem;padding-bottom:0rem;} </style>', unsafe_allow_html=True)
 st.markdown('<style>h1#anime-analytics{padding-top:0rem;} </style>', unsafe_allow_html=True)
@@ -361,8 +361,8 @@ elif selected=='Contact':
             </form>
         ''', unsafe_allow_html=True)
 
-        #if button:
+        if button:
             #send_req(comment)
-            #st.success("Thank you for Reaching out!")
+            st.success("Redirecting to Captcha...")
             # with open("assets\comments.txt", 'a') as file:
             #     file.write(f"{comment}\n____________________________________________\n")
