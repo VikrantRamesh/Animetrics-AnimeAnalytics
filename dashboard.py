@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
 import warnings
+import requests
 from ast import literal_eval
 from sklearn.preprocessing import MinMaxScaler
 from streamlit_plotly_events import plotly_events
@@ -14,18 +15,12 @@ warnings.filterwarnings('ignore')
 st.set_page_config(page_title='Anime Analytics', page_icon=":peacock:",layout='wide')
 
 
-title_alignment="""
-<style>
-#the-title {
-  text-align: center
-}
-</style>
-"""
-st.markdown(title_alignment, unsafe_allow_html=True)
+with open('css/master.css', 'r') as file:
+        css = file.read()
+        st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
+
 
 selected = "Home"
-
-
 
 ##Navigation Bar
 selected = option_menu(
@@ -145,8 +140,64 @@ if selected == 'Home':
     st.plotly_chart(fig,use_container_width=True)
 
 
+    ## Bubble Chart
+    ind = df.index[df['Title'] == "Doraemon (1979)"].tolist()
+    trans_df =  df.drop(ind)
+
+    trans_df['popularity'] = max(trans_df['popularity']) - trans_df['popularity'] +1 
+    ind = trans_df.index[trans_df['popularity'] <10000].tolist()
+    trans_df =  trans_df.drop(ind)
 
 
+    hover ='''
+    <b>Name:</b> %{customdata[0]} <br>
+    <b>Score:</b> %{customdata[1]} <br>
+    <b>Rank:</b> %{x} <br>
+    <b>Members:</b> %{customdata[2]} <br>
+    <b>Episodes:</b> %{customdata[3]} <br>
+            '''
+
+    fig = go.Figure()
+
+
+    colors_dict = {'TV': ' #FF5733', 'Movie': '#0099FF', 'OVA': ' #99FF33', 'Special': '#B533FF', 'ONA': '#FFA319'}  
+
+
+    for typ in trans_df['Type'].unique():
+
+        filtered_data = trans_df[trans_df['Type'] == typ]
+        custom = np.stack((filtered_data['Title'], filtered_data['Score'], filtered_data['Members'], filtered_data['Episodes']), axis=-1)
+        
+        # Add trace for each type
+        fig.add_trace(
+            go.Scatter(
+                x=filtered_data['Rank'], 
+                y=filtered_data['popularity'],  
+                customdata=custom,
+                mode="markers",
+                name=typ,  
+                marker=dict(color=colors_dict[typ],
+                            size=filtered_data["Members"],
+                            sizemode='area',
+                            sizeref=2.0 * max(filtered_data["Members"]) / (20 ** 2), 
+                            sizemin=4 )  
+            )
+        )
+        fig.update_traces(
+            
+            hovertemplate=hover
+        )
+
+
+    fig.update_layout(
+        title = "Rank vs Popularity vs Members",
+        xaxis = dict(title='Rank',autorange='reversed'),
+        yaxis = dict(title='Popularity'),
+        showlegend=True,
+        height=600,
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
 
 
 
@@ -214,15 +265,17 @@ elif selected=='Master Plot':
         
 
     with right:
+        
         st.selectbox("Select Y-axis:", ["Members", "popularity"], key="xaxis")
         #Boder
         st.markdown(
             """
             <style>
-            .st-df:last-child {
+            .st-emotion-cache-1v0mbdj.e115fcil1 img{
                 border-radius: 15px;
                 border: 2px solid white;
-                padding: 10px;
+                padding: 2px;
+                height:100%;
             }
             </style>
             """,
@@ -255,17 +308,18 @@ elif selected=='Contact':
         st.markdown(
             """
             <style>
-            
             .st-emotion-cache-1v0mbdj.e115fcil1 img{
                 border-radius: 50%;
+                padding: 10px;
+                border: 2px solid white;
                 box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
                 height:280px;
                 width:280px!important;
             }
             </style>
-            """
-            , unsafe_allow_html=True
-        )   
+            """,
+            unsafe_allow_html=True
+        )
         # Image display in circular boundary
         col_left, cent, col_right = st.columns(3)
         cent.image("assets/images/Vikrant.jpg",  use_column_width=True)
@@ -273,19 +327,42 @@ elif selected=='Contact':
 
 
     with right:
+
+        # def send_req(comment):
+        #     url = "https://formsubmit.co/rvikrant2004@gmail.com"
+        #     data = {
+        #         'comment': comment
+        #     }
+        #     print(comment)
+        #     response = requests.post(url, data=data)
+
+        #     if response.status_code == 200:
+        #         print("Form submitted successfully!")
+        #     else:
+        #         print("Failed to submit the form. Status code:", response.status_code)
+            # st.components.v1.components.iframe("https://example.com/success/", data=data)
+
+
         st.markdown("##### <b> Name: </b>&emsp;&emsp;&nbsp; Vikrant Ramesh", unsafe_allow_html=True)
         st.markdown("##### <b> Mail: </b>&emsp;&emsp;&emsp; rvikrant2004@gmail.com", unsafe_allow_html=True)
         st.markdown("##### <b> Github: </b>&emsp;&emsp; https://github.com/VikrantRamesh", unsafe_allow_html=True)
         st.markdown("##### <b> Linkedin: </b>&emsp;&nbsp;&nbsp;https://www.linkedin.com/in/vikrant-ramesh-046061190/", unsafe_allow_html=True)
         st.markdown("##### <b> Github: </b>&emsp;&emsp; https://github.com/VikrantRamesh", unsafe_allow_html=True)
-        
-        with st.form(key = 'comment_form', clear_on_submit=True):
-            comment=st.text_area('##### Reach out to Me!', )
-            button = st.form_submit_button("Send")
 
-        if button:
-            st.success("Thank you for Reaching out!")
-            with open("assets/comments.txt", 'a') as file:
-                file.write(f"{comment}\n____________________________________________\n")
+        # with st.form(key = 'comment_form', clear_on_submit=True):
+        #     comment=st.text_area('##### Reach out to Me!', key="comment")
+        #     button = st.form_submit_button("Send")
+        st.markdown('#####  Reach Out to Me!')
+        st.markdown('''
+            <form action="https://formsubmit.co/rvikrant2004@gmail.com" method="post">
+                <input name="name" placeholder ='Name' class='form_input'/>
+                <textarea name="comment" placeholder ='Comment'></textarea>
+                <input type="submit" value="Submit">
+            </form>
+        ''', unsafe_allow_html=True)
 
-    
+        #if button:
+            #send_req(comment)
+            #st.success("Thank you for Reaching out!")
+            # with open("assets\comments.txt", 'a') as file:
+            #     file.write(f"{comment}\n____________________________________________\n")
