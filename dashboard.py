@@ -357,7 +357,8 @@ elif selected=='Contact':
             <form action="https://formsubmit.co/rvikrant2004@gmail.com" method="post">
                 <input name="name" placeholder ='Name' class='form_input'/>
                 <textarea name="comment" placeholder ='Comment'></textarea>
-                <input type="submit" value="Submit">
+                <input type="hidden" name="_next" value="https://animetrics-animeanalytics.streamlit.app/">
+                <button type="submit" class="btn btn-lg btn-dark btn-block">Submit</button>
             </form>
         ''', unsafe_allow_html=True)
 
