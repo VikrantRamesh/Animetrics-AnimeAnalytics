@@ -358,6 +358,7 @@ elif selected=='Contact':
                 <input name="name" placeholder ='Name' class='form_input'/>
                 <textarea name="comment" placeholder ='Comment'></textarea>
                 <input type="hidden" name="_next" value="https://animetrics-animeanalytics.streamlit.app/">
+                <input type="hidden" name="_captcha" value="false">
                 <button type="submit" class="btn btn-lg btn-dark btn-block">Submit</button>
             </form>
         ''', unsafe_allow_html=True)
