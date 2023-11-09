@@ -354,11 +354,9 @@ elif selected=='Contact':
         #     button = st.form_submit_button("Send")
         st.markdown('#####  Reach Out to Me!')
         st.markdown('''
-            <form action="https://formsubmit.co/rvikrant2004@gmail.com" method="post">
+            <form action="https://formspree.io/f/mwkdzjpj" method="post">
                 <input name="name" placeholder ='Name' class='form_input'/>
                 <textarea name="comment" placeholder ='Comment'></textarea>
-                <input type="hidden" name="_next" value="https://animetrics-animeanalytics.streamlit.app/">
-                <input type="hidden" name="_captcha" value="false">
                 <button type="submit" class="btn btn-lg btn-dark btn-block">Submit</button>
             </form>
         ''', unsafe_allow_html=True)
