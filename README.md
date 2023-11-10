@@ -37,4 +37,4 @@ The final phase of the project encompasses the creation of a user-friendly front
 ## Deployment
 
 Access the project at:
-https://animetrics-animeanalytics.streamlit.app/
+https://animetrics.streamlit.app/
