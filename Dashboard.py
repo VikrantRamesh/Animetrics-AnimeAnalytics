@@ -19,16 +19,8 @@ with open('css/master.css', 'r') as file:
 
 selected = "Home"
 
-##Navigation Bar
-# with st.sidebar:    
-#     selected = option_menu(
-#             menu_title=None,
-#             options=['Home','Master Plot', 'Contact'],
-#             icons=['house', 'bar-chart-line', 'envelope'],
-#         )
-
 if selected == 'Home':
-    st.title("Anime Analytics")
+    st.title("Animetrics")
     st.markdown("###### Find Your Next Anime Recommendation!")
 st.markdown('<style>div.block-container{padding-top:3rem;padding-bottom:0rem;} </style>', unsafe_allow_html=True)
 st.markdown('<style>h1#anime-analytics{padding-top:0rem;} </style>', unsafe_allow_html=True)
