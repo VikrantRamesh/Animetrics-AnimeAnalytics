@@ -3,6 +3,7 @@ pandas==1.4.4
 plotly==5.9.0
 Requests==2.31.0
 scikit_learn==1.0.2
+st_gsheets_connection==0.0.3
 streamlit==1.28.0
 streamlit_option_menu==0.3.6
 streamlit_plotly_events==0.0.6
