@@ -6,46 +6,14 @@ footer {
 	visibility: hidden;
 }
 
-/* sidebar padding cancellation */
-.st-emotion-cache-16txtl3.eczjsme4{
-    padding: 0px 20px 0px !important;
-}
 
 /* Main Page padding cancellation */
 .block-container.st-emotion-cache-z5fcl4.ea3mdgi4{
     padding: 50px 50px 0px !important;
 }
 
-/* fix half graph issue*/
-iframe{
-    min-height:600px;
-}
-
-/* fixing small on reload issue*/ 
-.st-emotion-cache-1y4p8pa{
-    max-width:initial;
-}
-.st-emotion-cache-zjxta4{
-    height:1000px;
-}
-
-
-.st-emotion-cache-1v0mbdj.e115fcil1 img{
-    border-radius: 15px;
-    border: 2px solid white;
-    padding: 2px;
-
-}
-.st-emotion-cache-1v0mbdj.e115fcil1{
-    margin: 2px auto;
-}
-
 .block-container.st-emotion-cache-1y4p8pa.ea3mdgi4{
-    padding: 30px 100px 0px 0px;
+    padding: 30px 50px 0px 50px;
 
 }
 
-.st-emotion-cache-12w0qpk.e1f1d6gn2{
-    display:flex;
-    align-items:center;
-}

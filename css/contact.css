@@ -54,3 +54,8 @@ textarea {
     font-family: Arial, sans-serif;
     resize: none; 
 }
+
+/* fixing small on reload issue*/ 
+.st-emotion-cache-1y4p8pa{
+    max-width:initial;
+}
