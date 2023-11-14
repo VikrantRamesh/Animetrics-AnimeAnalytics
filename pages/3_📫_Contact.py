@@ -12,7 +12,7 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 sql = '''
 SELECT "Name", "Date", "Comment" FROM Comments WHERE "Name" IS NOT NULL;
 '''
-comment_data = conn.query(worksheet='Comments',sql =sql, ttl=5)
+comment_data = conn.query(spreadsheet='https://docs.google.com/spreadsheets/d/1RswQ-cHUhqmYI0POJChEJhSb7OOV9g4dHy1NK-HYLeo/edit#gid=0',worksheet='Comments',sql =sql, ttl=5)
 
 
 st.markdown("## <center>CONTACT ME</center>", unsafe_allow_html=True)
